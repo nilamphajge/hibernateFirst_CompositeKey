@@ -38,8 +38,6 @@ public class LifeSecureLoginController {
 	@Autowired
 	LifeSecureAgentService agentService;
 	
-	
-	
 	@Autowired
 	LifeSecureCustomerService customerService;
 	
@@ -105,6 +103,8 @@ public class LifeSecureLoginController {
 			 model =  new ModelAndView("registration", "userdetails", new UserDetails());
 		return model;
 	}
+	
+	
 	@PostMapping("/save")
 	public String saveUserDetails(@ModelAttribute("userModel") UserDetails userdetails,Model model ,@RequestParam("password")String password, MultipartFile[] fileUpload) throws IOException {
 		System.out.println("password::"+password);
@@ -143,44 +143,23 @@ public class LifeSecureLoginController {
 		} 		   
 			}
 	
-	@GetMapping("/header")
-	public String header() {
-		System.out.println("header is called");
-		return "header";
-
-	}
 	
-	@GetMapping("/footer")
-	public String footer() {
-		return "footer";
-
-	}
-	
-	@GetMapping("/contact")
-	public String contact() {
-		return "contact";
-
-	}
 	
 	//forgot password code
 
-	@GetMapping("/forgot")
-	public String forgetPasswordLink() {
-		return "forgotPassword";
-
-	}
+	
 
 	@GetMapping("/verifyusername")
-	public ModelAndView verifyusername(@RequestParam("email") String emailId, HttpSession session) {
+	public ModelAndView verifyUserEmail(@RequestParam("email") String emailId, HttpSession session) {
 
 		ModelAndView model = null;
 
 		String userMsg = loginService.verifyUserEmail(emailId, session);
 		
-		if (userMsg.equals("emailSent")) {
+		if (userMsg.equals(LifeSecureConstants.EMAILSENT)) {
 			model = new ModelAndView("verifyotp");
 			return model;
-		}else if(userMsg.equals("emailNotPresent")) {
+		}else if(userMsg.equals(LifeSecureConstants.EMAILNOTPRESENT)) {
 			model = new ModelAndView("login", "msg", "you are not registered user");
 			return model;
 		}
@@ -191,10 +170,7 @@ public class LifeSecureLoginController {
 		
 	}
 
-	@GetMapping("/reset")
-	public String resetpassword() {
-		return "verifyotp";
-	}
+	
 
 	
 
