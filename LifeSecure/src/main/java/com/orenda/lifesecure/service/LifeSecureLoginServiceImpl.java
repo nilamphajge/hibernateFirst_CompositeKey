@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.orenda.lifesecure.constants.LifeSecureConstants;
 import com.orenda.lifesecure.dao.LifeSecureLoginDao;
 import com.orenda.lifesecure.model.User;
 import com.orenda.lifesecure.model.UserDetails;
@@ -80,12 +79,12 @@ public class LifeSecureLoginServiceImpl implements LifeSecureLoginService {
 
 			flag = LifeSecureCommonUtility.sendEmail(msg, subject, form, to);
 			if (flag) {
-				verifyUserMsg = LifeSecureConstants.EMAILSENT;
+				verifyUserMsg = "emailSent";
 			} else {
-				verifyUserMsg = LifeSecureConstants.EMAILNOTSEND;
+				verifyUserMsg = "emailNotSend";
 			}
 		} else {
-			verifyUserMsg = LifeSecureConstants.EMAILNOTPRESENT;
+			verifyUserMsg = "emailNotPresent";
 		}
 
 		return verifyUserMsg;

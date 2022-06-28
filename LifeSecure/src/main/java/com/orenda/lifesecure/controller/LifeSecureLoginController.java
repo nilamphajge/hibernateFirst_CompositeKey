@@ -2,7 +2,6 @@ package com.orenda.lifesecure.controller;
 
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,8 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.orenda.lifesecure.constants.LifeSecureConstants;
 import com.orenda.lifesecure.model.Agent;
-import com.orenda.lifesecure.model.PolicyDetails;
-import com.orenda.lifesecure.model.TransactionHistory;
 import com.orenda.lifesecure.model.UserDetails;
 import com.orenda.lifesecure.service.LifeSecureAgentService;
 import com.orenda.lifesecure.service.LifeSecureCustomerService;
@@ -40,6 +37,8 @@ public class LifeSecureLoginController {
 	
 	@Autowired
 	LifeSecureAgentService agentService;
+	
+	
 	
 	@Autowired
 	LifeSecureCustomerService customerService;
@@ -72,19 +71,16 @@ public class LifeSecureLoginController {
 			model=new ModelAndView("admin");
 			return model;
 		} else if (userdetails.getUsertype().equalsIgnoreCase(LifeSecureConstants.CUSTOMER)) {
-			System.out.println("customer login success #####");
+			System.out.println("customer login success");
 			
-			
-			List<Object> listOfObjects = populateCustomerData(customerService);
-			System.out.println("############ "+listOfObjects.toString());
-			model=new ModelAndView("customer","listOfObjects",listOfObjects);
+			model=new ModelAndView("customer");
 			return model;
 
 		} else if (userdetails.getUsertype().equalsIgnoreCase(LifeSecureConstants.AGENT)) {
 			System.out.println("agent login success");
 			
 			List<Agent> customerList = agentService.getAllEmpList();
-			model=new ModelAndView("agent","uList",customerList);
+			model=new ModelAndView("Agent","uList",customerList);
 			return model;
 
 		}
@@ -98,26 +94,7 @@ public class LifeSecureLoginController {
 	}
 	
 	
-	private List<Object> populateCustomerData(LifeSecureCustomerService customerService) {
-		
-		List<Object> listOfObject = new ArrayList<Object>();
-		
-		UserDetails customerDetails = customerService.getCustomer();
-		System.out.println(customerDetails.toString());
-		
-		//model.addAttribute("userList", customerDetails);
-		listOfObject.add(customerDetails);
-		PolicyDetails policyDetails = customerService.getCustomer1();
-		System.out.println(policyDetails.toString());
-		//model.addAttribute("policyDetails", policyDetails);
-		listOfObject.add(policyDetails);
-		
-		List<TransactionHistory> transactionHistory = customerService.getAllTransactionList();
-		System.out.println(transactionHistory.toString());
-   		//model.addAttribute("transactionHistory" , transactionHistory);
-		listOfObject.add(transactionHistory);
-		return listOfObject;
-	}
+	
 	
 	//register code
 	
@@ -128,8 +105,6 @@ public class LifeSecureLoginController {
 			 model =  new ModelAndView("registration", "userdetails", new UserDetails());
 		return model;
 	}
-	
-	
 	@PostMapping("/save")
 	public String saveUserDetails(@ModelAttribute("userModel") UserDetails userdetails,Model model ,@RequestParam("password")String password, MultipartFile[] fileUpload) throws IOException {
 		System.out.println("password::"+password);
@@ -168,23 +143,44 @@ public class LifeSecureLoginController {
 		} 		   
 			}
 	
+	@GetMapping("/header")
+	public String header() {
+		System.out.println("header is called");
+		return "header";
+
+	}
 	
+	@GetMapping("/footer")
+	public String footer() {
+		return "footer";
+
+	}
+	
+	@GetMapping("/contact")
+	public String contact() {
+		return "contact";
+
+	}
 	
 	//forgot password code
 
-	
+	@GetMapping("/forgot")
+	public String forgetPasswordLink() {
+		return "forgotPassword";
+
+	}
 
 	@GetMapping("/verifyusername")
-	public ModelAndView verifyUserEmail(@RequestParam("email") String emailId, HttpSession session) {
+	public ModelAndView verifyusername(@RequestParam("email") String emailId, HttpSession session) {
 
 		ModelAndView model = null;
 
 		String userMsg = loginService.verifyUserEmail(emailId, session);
 		
-		if (userMsg.equals(LifeSecureConstants.EMAILSENT)) {
+		if (userMsg.equals("emailSent")) {
 			model = new ModelAndView("verifyotp");
 			return model;
-		}else if(userMsg.equals(LifeSecureConstants.EMAILNOTPRESENT)) {
+		}else if(userMsg.equals("emailNotPresent")) {
 			model = new ModelAndView("login", "msg", "you are not registered user");
 			return model;
 		}
@@ -195,7 +191,10 @@ public class LifeSecureLoginController {
 		
 	}
 
-	
+	@GetMapping("/reset")
+	public String resetpassword() {
+		return "verifyotp";
+	}
 
 	
 
