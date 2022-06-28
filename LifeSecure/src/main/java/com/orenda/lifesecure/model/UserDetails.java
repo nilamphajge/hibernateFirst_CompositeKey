@@ -18,10 +18,10 @@ public class UserDetails {
 	@Column(name = "user_id")
 	private int id;
 	@Column(name = "user_fname")
-	private String FirstName;
+	private String firstName;
 
 	@Column(name = "user_mname")
-	private String MiddleName;
+	private String middleName;
 
 	@Column(name = "user_lname")
 	private String lastName;
@@ -85,19 +85,19 @@ public class UserDetails {
 	}
 
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getMiddleName() {
-		return MiddleName;
+		return this.middleName;
 	}
 
 	public void setMiddleName(String middleName) {
-		MiddleName = middleName;
+		this.middleName = middleName;
 	}
 
 	public String getLastName() {
@@ -234,7 +234,7 @@ public class UserDetails {
 
 	@Override
 	public String toString() {
-		return "UserDetails [id=" + id + ", FirstName=" + FirstName + ", MiddleName=" + MiddleName + ", lastName="
+		return "UserDetails [id=" + id + ", FirstName=" + firstName + ", MiddleName=" + middleName + ", lastName="
 				+ lastName + ", usertype=" + usertype + ", gender=" + gender + ", DOB=" + DOB + ", PrimaryContact="
 				+ PrimaryContact + ", AltanateContact=" + AltanateContact + ", Email=" + email + ", image=" + image
 				+ ", IdType=" + IdType + ", AdharNumber=" + AdharNumber + "]";

@@ -42,7 +42,7 @@ public class LifeSecureLoginDaoImpl implements LifeSecureLoginDao {
 		UserDetails userdetails=null;
 		
 			
-		Query query = session.createQuery(" from UserDetails  where email=?");
+		Query query = session.createQuery("from UserDetails u where u.email=?");
 		 userdetails = (UserDetails) query.setParameter(0, username).getSingleResult();
 		
 		System.out.println("hello"+userdetails.toString());
