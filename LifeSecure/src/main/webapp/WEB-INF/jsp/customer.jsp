@@ -33,7 +33,7 @@
 							<h6>
 								ID :&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 								&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-								<c:out value="${userList.id }"></c:out>
+								<c:out value="${listOfObjects.get(0).id }"></c:out>
 							</h6>
 						</div>
 						<div class="col-md-8">
@@ -41,7 +41,7 @@
 								<h6>
 									Name :&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 									&nbsp;&nbsp;&nbsp; &nbsp;
-									<c:out value="  ${userList.lastName }"></c:out>
+									<c:out value="  ${listOfObjects.get(0).lastName }"></c:out>
 
 
 								</h6>
@@ -52,7 +52,7 @@
 							<h6>
 								Email ID :&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 								&nbsp;&nbsp;
-								<c:out value="${userList.email }"></c:out>
+								<c:out value="${listOfObjects.get(0).email }"></c:out>
 							</h6>
 						</div>
 
@@ -60,7 +60,7 @@
 							<h6>
 								Gender :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:out value="${userList.gender}"></c:out>
+								<c:out value="${listOfObjects.get(0).gender}"></c:out>
 							</h6>
 						</div>
 						<div class="col-md-8">
@@ -92,7 +92,7 @@
 								<h6>
 									Policy ID :&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 									&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-									<c:out value="${policyDetails.policyId }"></c:out>
+									<c:out value="${listOfObjects.get(1).policyId }"></c:out>
 								</h6>
 							</div>
 							<div class="col-md-8">
@@ -100,7 +100,7 @@
 									<h6>
 										Policy Type :&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<c:out value="${policyDetails.policyType }"></c:out>
+										<c:out value="${listOfObjects.get(1).policyType }"></c:out>
 									</h6>
 								</div>
 							</div>
